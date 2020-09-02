@@ -2,6 +2,7 @@ package springBoot.jpa.SpringBoot.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import springBoot.jpa.SpringBoot.dao.EmployeeDao;
@@ -31,5 +32,19 @@ public class EmplRestController {
          return employeeDao.findAll();
      }
 
+
+     @GetMapping("/employees/{employeeId}")
+
+    public Employee  getEmploye (@PathVariable int employeeId)
+     {
+       Employee theEmployee =employeeDao.findById(employeeId);
+
+       if (theEmployee==null)
+       { throw new RuntimeException("Employee not found");
+       }
+
+       return theEmployee;
+       
+     }
 
 }
